@@ -450,6 +450,8 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    //Since the following three statements generate the same values when the function is ran
+    //I moved them out of the for loop, this elimates layout thrashing.
     var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length
     var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
     var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
@@ -526,7 +528,7 @@ var timer = null;
 var flag = 0;
 var requestId = 0;
 var items = 0;
-// the following is used to detect firefox, used in scrollAnimate to scrollTop property.
+// the following is used to detect firefox, used in scrollAnimate for scrollTop property.
 var raf = window.mozRequestAnimationFrame || 1;
 
 // runs updatePositions on Load, this is the only time this function is ever called to set the pizzas in place.
