@@ -525,15 +525,16 @@ var timer = null;
 var flag = 0;
 var requestId = 0;
 var items = 0;
+// the following is used to detect firefox, used in scrollAnimate to scrollTop property.
 var raf = window.mozRequestAnimationFrame || 1;
 
 // runs updatePositions on Load, this is the only time this function is ever called to set the pizzas in place.
 // window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  var cols = 6;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 18; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -554,14 +555,12 @@ window.addEventListener('scroll', function() {
         if( flag === 0 ) {
           // flag is set to one to run the scrollAnimate function only once.
           flag = 1;
-          console.log('scrollAnimate');
           scrollAnimate();
         }
         clearTimeout(timer);
     }
     timer = setTimeout(function() {
           // scrolling is stopped
-          console.log('stop scrolling');
           // cancels the requestAnimationFrame recursive loop.
           cancelAnimationFrame(requestId);
           requestId = undefined;
@@ -571,13 +570,14 @@ window.addEventListener('scroll', function() {
 }, false);
 
 function scrollAnimate() {
-  //console.log('yay!: '+raf);
+  // console.log('yay!: '+raf);
   if (raf!=1){
+    // code for firefox
     var docuBodyscrollTop = document.documentElement.scrollTop;
   } else {
+    // code for chrome
     var docuBodyscrollTop = document.body.scrollTop;
   }
-  console.log(docuBodyscrollTop);
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
