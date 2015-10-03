@@ -450,10 +450,11 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length
+    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
+    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    for (var i = 0; i < rPizzaClength; i++) {
+      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -502,7 +503,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var docuBodyscrollTop = document.body.scrollTop;
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -546,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
   // items is ran once, used to be part of animation, since it only need to run once i decided to put it here.
-  items = document.querySelectorAll('.mover');
+  items = document.getElementsByClassName('mover');
 });
 // the following function allows to run animation on scroll once, and then stop when user stops scrolling.
 // code was found on stackoverflow.com, sorry :( but I couldn't find the exact link, but there are many examples.
