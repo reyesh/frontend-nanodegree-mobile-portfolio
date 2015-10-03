@@ -14,7 +14,7 @@ The final project can be seen at [https://reye.sh/frontend-nanodegree-mobile-por
 
 In the original code the scrolling pizzas caused jank while in animation. The following problems where found:
 
-1. The animation was done while the scroll event actived. In other words as the browser was scrolling the function was kept being called on. 
+1. The animation was done while the scroll event actived. In other words as the browser was scrolling the function was kept being called on.
 1. The actual function that animated the pizza was causing layout trashing
 1. There was over 200 pizzas animating and of them only about 18 were on onscreen.
 
@@ -90,7 +90,7 @@ function scrollAnimate() {
 }
 ```
 The end results:
-![timeline trace](/images/logo.png)
+![timeline trace](/README-IMG/screenshot-60fps.png)
 
 pretty awesome! huh?
 
@@ -100,7 +100,7 @@ In the original code once the slider was moved to resize the pizzas on the scree
 
 1. The main culprit for this is layout trashing.
 
-In the following example I moved necessary statements from the for loop. The statements accessed layout causing jankiness. 
+In the following example I moved necessary statements from the for loop. The statements accessed layout causing jankiness.
 
 ```javascript
   function changePizzaSizes(size) {
@@ -151,7 +151,7 @@ Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
