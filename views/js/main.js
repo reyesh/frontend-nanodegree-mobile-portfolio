@@ -452,7 +452,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     //Since the following three statements generate the same values when the function is ran
     //I moved them out of the for loop, this elimates layout thrashing.
-    var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length
+    var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length;
     var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
     var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < rPizzaClength; i++) {
