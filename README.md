@@ -1,10 +1,94 @@
 ## Website Performance Optimization portfolio project
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
-
-To get started, check out the repository, inspect the code,
+After learning about the critical rendering path in [Website Performance Optimization](https://www.udacity.com/course/ud884), and learning about RAIL (Response, Animate, Idle and Load) the four major life cycles of a web app in [Browser Rendering Optimization](https://www.udacity.com/course/ud860), I was given this project to apply what techniques I had learned.
 
 ### Getting started
+
+####Part 1: Running the final project
+
+The final project can be seen at [https://reye.sh/frontend-nanodegree-mobile-portfolio](https://reye.sh/frontend-nanodegree-mobile-portfolio). If you need to see the code, it's in the branch `gh-pages` in this repository.
+
+####Part 2: Optimization that were preformed.
+
+##### 1) 60fps on scrolling in views/pizza.html
+
+In the original code the scrolling pizzas caused jank while in animation. The following problems where found:
+
+1. The animation was done while the scroll event actived 
+1. Layout trashing
+1. There was over 200 pizzas animating of them and only about 18 were on onscreen.
+
+The following code shows how I tackled these issues:
+
+```javascript
+// the following variables are needed to scroll background pizza. They are animated using
+// requestAnimationFrame (in scrollAnimate function) once and on the first scroll, and
+// requestAnimationFrame is stopped when the user stops scrolling.
+
+var timer = null;
+var flag = 0;
+var requestId = 0;
+var items = 0;
+// the following is used to detect firefox, used in scrollAnimate for scrollTop property.
+var raf = window.mozRequestAnimationFrame || 1;
+
+// runs updatePositions on Load, this is the only time this function is ever called to set the pizzas in place.
+// window.addEventListener('scroll', updatePositions);
+// Generates the sliding pizzas when the page loads.
+document.addEventListener('DOMContentLoaded', function() {
+  var cols = 6;
+  var s = 256;
+  for (var i = 0; i < 18; i++) {
+    var elem = document.createElement('img');
+    elem.className = 'mover';
+    elem.src = "images/pizza.png";
+    elem.style.height = "100px";
+    elem.style.width = "73.333px";
+    elem.basicLeft = (i % cols) * s;
+    elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    document.querySelector("#movingPizzas1").appendChild(elem);
+  }
+  updatePositions();
+  // items is ran once, used to be part of animation, since it only need to run once i decided to put it here.
+  items = document.getElementsByClassName('mover');
+});
+// the following function allows to run animation on scroll once, and then stop when user stops scrolling.
+// code was found on stackoverflow.com, sorry :( but I couldn't find the exact link, but there are many examples.
+window.addEventListener('scroll', function() {
+    if(timer !== null) {
+        if( flag === 0 ) {
+          // flag is set to one to run the scrollAnimate function only once.
+          flag = 1;
+          scrollAnimate();
+        }
+        clearTimeout(timer);
+    }
+    timer = setTimeout(function() {
+          // scrolling is stopped
+          // cancels the requestAnimationFrame recursive loop.
+          cancelAnimationFrame(requestId);
+          requestId = undefined;
+          // reset flag to 0, to start the next scrollAnimate on scroll.
+          flag = 0;
+    }, 200);
+}, false);
+
+function scrollAnimate() {
+  // console.log('yay!: '+raf);
+  if (raf!=1){
+    // code for firefox
+    var docuBodyscrollTop = document.documentElement.scrollTop;
+  } else {
+    // code for chrome
+    var docuBodyscrollTop = document.body.scrollTop;
+  }
+  for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+  requestId = requestAnimationFrame(scrollAnimate);
+}
+```
 
 ####Part 1: Optimize PageSpeed Insights score for index.html
 
