@@ -525,6 +525,7 @@ var timer = null;
 var flag = 0;
 var requestId = 0;
 var items = 0;
+var raf = window.mozRequestAnimationFrame || 1;
 
 // runs updatePositions on Load, this is the only time this function is ever called to set the pizzas in place.
 // window.addEventListener('scroll', updatePositions);
@@ -553,13 +554,14 @@ window.addEventListener('scroll', function() {
         if( flag === 0 ) {
           // flag is set to one to run the scrollAnimate function only once.
           flag = 1;
+          console.log('scrollAnimate');
           scrollAnimate();
         }
         clearTimeout(timer);
     }
     timer = setTimeout(function() {
           // scrolling is stopped
-
+          console.log('stop scrolling');
           // cancels the requestAnimationFrame recursive loop.
           cancelAnimationFrame(requestId);
           requestId = undefined;
@@ -569,7 +571,13 @@ window.addEventListener('scroll', function() {
 }, false);
 
 function scrollAnimate() {
-  var docuBodyscrollTop = document.body.scrollTop;
+  //console.log('yay!: '+raf);
+  if (raf!=1){
+    var docuBodyscrollTop = document.documentElement.scrollTop;
+  } else {
+    var docuBodyscrollTop = document.body.scrollTop;
+  }
+  console.log(docuBodyscrollTop);
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
