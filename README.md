@@ -92,7 +92,7 @@ function scrollAnimate() {
 The end results:
 ![timeline trace](/README-IMG/screenshot-60fps.png)
 
-pretty awesome! huh?
+Frames in under 60fps! pretty awesome! huh?
 
 ##### 2) Pizza resizing in less than 5 ms in views/pizza.html
 
@@ -117,7 +117,7 @@ In the following example I moved necessary statements from the for loop. The sta
 The end result:
 ![timeline trace](/README-IMG/screenshot-pizzaresize-5ms.png)
 
-super fast!
+resized pizzas in 1.712ms! super fast!
 
 ##### 3) Achieving PageSpeed score of 90/100 on index.html
 
