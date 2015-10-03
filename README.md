@@ -114,6 +114,10 @@ In the following example I moved necessary statements from the for loop. The sta
     }
   }
 ```
+The end result:
+![timeline trace](/README-IMG/screenshot-pizzaresize-5ms.png)
+
+super fast!
 
 ##### 3) Achieving PageSpeed score of 90/100 on index.html
 
