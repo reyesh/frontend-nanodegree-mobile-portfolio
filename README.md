@@ -89,6 +89,9 @@ function scrollAnimate() {
   requestId = requestAnimationFrame(scrollAnimate);
 }
 ```
+The end results:
+![timeline trace](/images/logo.png)
+
 pretty awesome! huh?
 
 ##### 2) Pizza resizing in less than 5 ms in views/pizza.html
