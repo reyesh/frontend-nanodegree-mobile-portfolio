@@ -14,9 +14,9 @@ The final project can be seen at [https://reye.sh/frontend-nanodegree-mobile-por
 
 In the original code the scrolling pizzas caused jank while in animation. The following problems where found:
 
-1. The animation was done while the scroll event actived 
-1. Layout trashing
-1. There was over 200 pizzas animating of them and only about 18 were on onscreen.
+1. The animation was done while the scroll event actived. In other words as the browser was scrolling the function was kept being called on. 
+1. The actual function that animated the pizza was causing layout trashing
+1. There was over 200 pizzas animating and of them only about 18 were on onscreen.
 
 The following code shows how I tackled these issues:
 
@@ -89,6 +89,38 @@ function scrollAnimate() {
   requestId = requestAnimationFrame(scrollAnimate);
 }
 ```
+pretty awesome! huh?
+
+##### 2) Pizza resizing in less than 5 ms in views/pizza.html
+
+In the original code once the slider was moved to resize the pizzas on the screen, the function took more than 200ms to complete.
+
+1. The main culprit for this is layout trashing.
+
+In the following example I moved necessary statements from the for loop. The statements accessed layout causing jankiness. 
+
+```javascript
+  function changePizzaSizes(size) {
+    //Since the following three statements generate the same values when the function is ran
+    //I moved them out of the for loop, this elimates layout thrashing.
+    var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length;
+    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
+    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    for (var i = 0; i < rPizzaClength; i++) {
+      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+    }
+  }
+```
+
+##### 3) Achieving PageSpeed score of 90/100 on index.html
+
+
+
+
+
+
+
+
 
 ####Part 1: Optimize PageSpeed Insights score for index.html
 
