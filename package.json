@@ -1,0 +1,26 @@
+{
+  "name": "frontend-nanodegree-mobile-portfolio",
+  "version": "1.0.0",
+  "description": "After learning about the critical rendering path in [Website Performance Optimization](https://www.udacity.com/course/ud884), and learning about RAIL (Response, Animate, Idle and Load) the four major life cycles of a web app in [Browser Rendering Optimization](https://www.udacity.com/course/ud860), I was given this project to apply what techniques I had learned.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reyesh/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reyesh/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/reyesh/frontend-nanodegree-mobile-portfolio",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-processhtml": "^0.3.8",
+    "load-grunt-tasks": "^3.3.0"
+  }
+}

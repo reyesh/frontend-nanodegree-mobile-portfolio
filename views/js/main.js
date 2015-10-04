@@ -574,12 +574,13 @@ window.addEventListener('scroll', function() {
 
 function scrollAnimate() {
   // console.log('yay!: '+raf);
+  var docuBodyscrollTop;
   if (raf!=1){
     // code for firefox
-    var docuBodyscrollTop = document.documentElement.scrollTop;
+    docuBodyscrollTop = document.documentElement.scrollTop;
   } else {
     // code for chrome
-    var docuBodyscrollTop = document.body.scrollTop;
+    docuBodyscrollTop = document.body.scrollTop;
   }
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
