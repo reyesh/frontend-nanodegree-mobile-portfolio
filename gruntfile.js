@@ -39,9 +39,11 @@ module.exports = function(grunt) {
 
 		processhtml: {
 			dist: {
-				src: 'src/index.html',
-				dest: 'index.html'
-			}
+        files: {
+          'index.html': ['src/index.html'],
+          'project-2048.html': ['src/project-2048.html']
+        }
+      }
 		}
 
 	});
