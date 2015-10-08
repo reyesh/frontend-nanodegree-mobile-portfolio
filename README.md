@@ -75,17 +75,21 @@ window.addEventListener('scroll', function() {
 
 function scrollAnimate() {
   // console.log('yay!: '+raf);
+  var docuBodyscrollTop;
   if (raf!=1){
     // code for firefox
-    var docuBodyscrollTop = document.documentElement.scrollTop;
+    docuBodyscrollTop = document.documentElement.scrollTop;
   } else {
     // code for chrome
-    var docuBodyscrollTop = document.body.scrollTop;
+    docuBodyscrollTop = document.body.scrollTop;
   }
+  // the following for loop moves all the pizzas at a time.
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
+  // instead of calling scrollAnimate function every time scroll is invoked I dicided
+  // to used requestAnimationFrame
   requestId = requestAnimationFrame(scrollAnimate);
 }
 ```
