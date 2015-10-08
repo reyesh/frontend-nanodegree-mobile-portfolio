@@ -8,6 +8,13 @@ module.exports = function(grunt) {
       all: ['Gruntfile.js', 'src/js/*.js', 'src/views/js/*.js']
     },
 
+    uglify: {
+        build: {
+            src:  'src/views/js/main.js',
+            dest: 'src/views/js/main.min.js'
+        }
+    },
+
     cssmin: {
       target: {
         files: [{
@@ -51,7 +58,7 @@ module.exports = function(grunt) {
           'project-2048.html': ['src/project-2048.html'],
           'project-mobile.html': ['src/project-mobile.html'],
           'project-webperf.html': ['src/project-webperf.html'],
-          'views/pizza.html': ['src/views/pizza.html']          
+          'views/pizza.html': ['src/views/pizza.html']
         }
       }
 		}
@@ -61,6 +68,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'imagemin',
     'jshint',
+    'uglify',
     'cssmin',
     'processhtml'
   ]);
