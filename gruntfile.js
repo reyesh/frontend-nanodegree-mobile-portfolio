@@ -50,7 +50,8 @@ module.exports = function(grunt) {
           'index.html': ['src/index.html'],
           'project-2048.html': ['src/project-2048.html'],
           'project-mobile.html': ['src/project-mobile.html'],
-          'project-webperf.html': ['src/project-webperf.html']
+          'project-webperf.html': ['src/project-webperf.html'],
+          'views/pizza.html': ['src/views/pizza.html']          
         }
       }
 		}
