@@ -16,6 +16,13 @@ module.exports = function(grunt) {
           src: ['*.css'],
           dest: 'src/css',
           ext: '.min.css'
+        },
+        {
+          expand: true,
+          cwd: 'src/views/css',
+          src: ['*.css'],
+          dest: 'src/views/css',
+          ext: '.min.css'
         }]
       }
     },
@@ -41,7 +48,9 @@ module.exports = function(grunt) {
 			dist: {
         files: {
           'index.html': ['src/index.html'],
-          'project-2048.html': ['src/project-2048.html']
+          'project-2048.html': ['src/project-2048.html'],
+          'project-mobile.html': ['src/project-mobile.html'],
+          'project-webperf.html': ['src/project-webperf.html']
         }
       }
 		}
