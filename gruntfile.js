@@ -20,6 +20,23 @@ module.exports = function(grunt) {
       }
     },
 
+    imagemin: {
+      dynamic: {
+          files: [{
+              expand: true,
+              cwd: 'src/img/',
+              src: ['**/*.{png,jpg,gif}'],
+              dest: 'img/'
+          },
+          {
+              expand: true,
+              cwd: 'src/views/images/',
+              src: ['**/*.{png,jpg,gif}'],
+              dest: 'views/images/'
+          }]
+      }
+    },
+
 		processhtml: {
 			dist: {
 				src: 'src/index.html',
@@ -30,6 +47,7 @@ module.exports = function(grunt) {
 	});
 
   grunt.registerTask('default', [
+    'imagemin',
     'jshint',
     'cssmin',
     'processhtml'
