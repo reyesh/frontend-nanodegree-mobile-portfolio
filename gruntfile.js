@@ -5,16 +5,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     jshint: {
-      all: ['Gruntfile.js', 'js/*.js', 'views/js/*.js']
+      all: ['Gruntfile.js', 'src/js/*.js', 'src/views/js/*.js']
     },
 
     cssmin: {
       target: {
         files: [{
           expand: true,
-          cwd: 'css',
+          cwd: 'src/css',
           src: ['*.css'],
-          dest: 'css',
+          dest: 'src/css',
           ext: '.min.css'
         }]
       }
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 
 		processhtml: {
 			dist: {
-				src: 'index-original.html',
+				src: 'src/index.html',
 				dest: 'index.html'
 			}
 		}
