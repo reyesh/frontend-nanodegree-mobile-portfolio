@@ -129,6 +129,18 @@ Utilizing grunt I minified css, js and inline the code since the files were not 
 
 ![Google PageSpeed score](/README-IMG/screenshot-pagespeed.png)
 
+####Part 3: Grunt Tasks
+
+The following project uses the following grunt task which would need to be downloaded separately if someone needed to recreate the production version of this project.
+
+1. jshint
+2. uglify
+3. cssmin
+4. imagemin
+5. processhtml
+
+Grunt works with the source files located at `/src` and the processed production files are moved to `/` (root).
+
 ---
 
 
