@@ -452,11 +452,12 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     //Since the following three statements generate the same values when the function is ran
     //I moved them out of the for loop, this elimates layout thrashing.
-    var rPizzaClength = document.getElementsByClassName("randomPizzaContainer").length;
-    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
-    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    var pizzas = document.getElementsByClassName("randomPizzaContainer");
+    var rPizzaClength = pizzas.length;
+    var dx = determineDx(pizzas[0], size);
+    var newwidth = (pizzas[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < rPizzaClength; i++) {
-      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+      pizzas[i].style.width = newwidth;
     }
   }
 
@@ -472,8 +473,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+
+var pizzasDiv = document.getElementById("randomPizzas");
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -506,9 +509,14 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   var docuBodyscrollTop = document.body.scrollTop;
   var items = document.getElementsByClassName('mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var phase = [];
+  //Calulate the phase, moved outside of the main loop
+  for (var i = 0; i < 5; i++) {
+      phase.push(Math.sin(docuBodyscrollTop / 1250 + i) * 100);
+  }
+  // positioning pizzas
+  for (var i = 0, max = items.length; i < max; i++) {
+    items[i].style.left = items[i].basicLeft + phase[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
