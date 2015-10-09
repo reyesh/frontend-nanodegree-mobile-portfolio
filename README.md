@@ -138,6 +138,7 @@ The following project uses the following grunt task which would need to be downl
 3. cssmin
 4. imagemin
 5. processhtml
+6. load-grunt-tasks
 
 Grunt works with the source files located at `/src` and the processed production files are moved to `/` (root).
 
