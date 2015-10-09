@@ -515,7 +515,7 @@ function updatePositions() {
       phase.push(Math.sin(docuBodyscrollTop / 1250 + i) * 100);
   }
   // positioning pizzas
-  for (var i = 0, max = items.length; i < max; i++) {
+  for (i = 0, max = items.length; i < max; i++) {
     items[i].style.left = items[i].basicLeft + phase[i%5] + 'px';
   }
 
@@ -545,7 +545,21 @@ var raf = window.mozRequestAnimationFrame || 1;
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 6;
   var s = 256;
-  for (var i = 0; i < 18; i++) {
+  var windowHeight = window.innerHeight;
+  var numberOfPizzas;
+  // depending on innerHeight of window we set the number of pizza
+  // being displayed in the background
+  if (windowHeight <= 500){
+    numberOfPizzas = 12;
+  }else if(windowHeight <= 700){
+    numberOfPizzas = 18;
+  }else if(windowHeight <= 1400){
+    numberOfPizzas = 36;
+  }else {
+    numberOfPizzas = 54;
+  }
+  console.log(numberOfPizzas + " " + windowHeight);
+  for (var i = 0; i < numberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -590,10 +604,15 @@ function scrollAnimate() {
     // code for chrome
     docuBodyscrollTop = document.body.scrollTop;
   }
-  // the following for loop moves all the pizzas at a time.
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((docuBodyscrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+
+  var phase = [];
+  //Calulate the phase, moved outside of the main loop
+  for (var i = 0; i < 5; i++) {
+      phase.push(Math.sin(docuBodyscrollTop / 1250 + i) * 100);
+  }
+  // positioning pizzas
+  for (i = 0, max = items.length; i < max; i++) {
+    items[i].style.left = items[i].basicLeft + phase[i%5] + 'px';
   }
   // instead of calling scrollAnimate function every time scroll is invoked I dicided
   // to used requestAnimationFrame
